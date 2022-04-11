@@ -20,7 +20,7 @@ public class Tank extends Character{
     }
 
     public String getWeaponType(){
-        return charactoerWeaponType;
+        return characterWeaponType;
     }
 
     //setters
@@ -37,7 +37,7 @@ public class Tank extends Character{
     }
 
     public void setCharactoerWeaponType(String newCharWeapon) {
-        charactoerWeaponType = newCharWeapon;
+        characterWeaponType = newCharWeapon;
     }
 
 

@@ -19,7 +19,7 @@ public class Archer extends Character {
     }
 
     public String getWeaponType(){
-        return charactoerWeaponType;
+        return characterWeaponType;
     }
 
     //setters
@@ -36,7 +36,7 @@ public class Archer extends Character {
     }
 
     public void setCharactoerWeaponType(String newCharWeapon) {
-        charactoerWeaponType = newCharWeapon;
+        characterWeaponType = newCharWeapon;
     }
 
 

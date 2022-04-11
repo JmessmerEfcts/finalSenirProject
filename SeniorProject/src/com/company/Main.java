@@ -11,6 +11,8 @@ public class Main {
     public static void main(String[] args) {
         //System.out.println("Welcome to my RPG game Please select a class");
         Soldier soldier = new Soldier();
+        Boss boss = new Boss();
+        System.out.println(boss);
 
 
     }
