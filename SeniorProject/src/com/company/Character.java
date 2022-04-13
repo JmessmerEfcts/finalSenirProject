@@ -6,13 +6,13 @@ public class Character {
     String characterWeaponType;
     String characterName;
 
-    //constructor for Bosses
-//    public Character(){
-//        hitPoints = 0;
-//        characterType = "";
-//        characterName = "";
-//        charactoerWeaponType = "";
-//    }
+    //empty Character
+    public Character(){
+        hitPoints = 0;
+        characterType = "";
+        characterName = "";
+        characterWeaponType = "";
+    }
 
     //constructor for player Choices
     public Character(int hp, String type, String weapon, String name){

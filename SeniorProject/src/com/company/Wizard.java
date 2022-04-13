@@ -37,7 +37,7 @@ public class Wizard extends Character{
         characterName = newCharName;
     }
 
-    public void setCharactoerWeaponType(String newCharWeapon) {
+    public void setCharacterWeaponType(String newCharWeapon) {
         characterWeaponType = newCharWeapon;
     }
 

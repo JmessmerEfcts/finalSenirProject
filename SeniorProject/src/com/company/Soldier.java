@@ -38,7 +38,7 @@ public class Soldier extends Character {
         characterName = newCharName;
     }
 
-    public void setCharactoerWeaponType(String newCharWeapon) {
+    public void setCharacterWeaponType(String newCharWeapon) {
         characterWeaponType = newCharWeapon;
     }
 

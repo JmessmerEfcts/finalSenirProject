@@ -10,8 +10,7 @@ public class myGui {
     private JButton myButton;
 
 
-
-
-
-
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
