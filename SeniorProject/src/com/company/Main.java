@@ -6,6 +6,7 @@ import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 import java.io.*;
 import java.util.Scanner;
 
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -13,7 +14,7 @@ public class Main {
         BufferedWriter writer = new BufferedWriter(new FileWriter("userInfo"));
 
         //creates empty player obj
-        Player player = new Player();
+         Player player = new Player();
 
         //ask for userInfo and store in external file
         System.out.println("Please enter your name");
@@ -46,6 +47,7 @@ public class Main {
         }else if(userClassChoice.equals("archer") || userClassChoice.equals("Archer")){
             writer.write(userClassChoice);
             player.setArcher();
+
             System.out.println(player);
         }else if(userClassChoice.equals("wizard") || userClassChoice.equals("Wizard")){
             writer.write(userClassChoice);
@@ -59,38 +61,59 @@ public class Main {
 
         /*
         TODO
-         @setup dungeon progression 5 rooms entering doors encountering bosses, picking up buffs
-         @then put it together so that it flows nicely
+         @Work on Battle Sequence
+         @boss attacks dont damage you
+         @sometimes boss doesnt select a weapon
+         @
          */
 
         System.out.println("okay " + userClassChoice + " you have entered room 1");
+
         Boss bossObj = new Boss();
-            bossObj.setBossWeapon();
-            bossObj.setBossName("Brog");
+            bossObj.generateBossWeapon();
+            bossObj.setBossName();
             System.out.println(bossObj.toString());
 
-        System.out.println("What would you like to do?");
+        Battle battle = new Battle(player, bossObj);
+
         //displays possible player actions
-        player.playerActionChoices();
-        String userAction = sc.nextLine();
-        //sets the player action
-        player.setPlayerAction(userAction);
-        //displays possiblesBossActions
-        bossObj.possibleBossActions();
+        battle.playerActionChoices();
+         String playerAction = sc.nextLine();
+         System.out.println(playerAction);
+
+        //Boss chooses action
+        battle.possibleBossActions();
+
+        //calculate results
+        //battle.checkMoves();
+        //playerMoves(player,bossObj);
+
+       //display player stats
+       System.out.println(player);
 
 
-        /*
+          /*
         TODO
-         @setup story and game progress walking in the dungeon selecting doors etc
-         @using the playerActionChoices() function display the possible action choices
-         @allow the user to select the choices and print it to the console
-         @you have to use the Scanner but since the function is in another class that's challenging
-         @I have a field in the player class called playerAction using the setPlayerAction function that might
-         @all the user to select the choices
+         @Work on Battle Sequence
+         @boss attacks dont damage you
+         @sometimes boss doesnt select a weapon
+         @
          */
-
-
     }
+
+
+//    public static void playerMoves(Player player, Boss boss){
+//        Scanner sc = new Scanner(System.in);
+//        //display playerActionChoice()
+//        player.playerActionChoices();
+//        String userAction = sc.nextLine();
+//        player.setPlayerAction(userAction);
+//        System.out.println(userAction);
+//
+//        //display bosses move
+//        boss.possibleBossActions();
+//        player.decreasePlayerHpByOne();
+//    }
 
 }
 

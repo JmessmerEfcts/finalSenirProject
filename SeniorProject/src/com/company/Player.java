@@ -14,13 +14,13 @@ public class Player {
     // array storing possible class selections for user
     Character characterArr[] = {soldier, tank, archer, wizard};
 
-    int playerHp;
-    String characterName;
-    String classChoice;
-    String playerWeaponType;
-    String userName;
-    String userAge;
-    String playerAction;
+    private int playerHp;
+    private String characterName;
+    private String classChoice;
+    private String playerWeaponType;
+    private String userName;
+    private String userAge;
+    private String playerAction;
 
     public Player(){
         playerHp = 0;
@@ -33,12 +33,41 @@ public class Player {
     }
 
     public  void displayClassChoices() {
+        Scanner sc = new Scanner(System.in);
+
         String arr[] = {"Soldier", "Tank", "Archer", "Wizard"};
         int i;
         for (i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
+
     }
+
+    //player action choices depending on the users choice of class
+//    public void playerActionChoices(){
+//        if(classChoice.equals("Soldier")) {
+//            String choices[] = {"Swing Sword,", " Shield Up ", " Dodge ", " Heal"};
+//            for(int i = 0; i < choices.length; i++){
+//                System.out.print(choices[i] + " ");
+//            }
+//
+//        }else if(classChoice.equals("Tank")){
+//            String choices[] = {"heavy Swing,", "Shield Up ", " Heal"};
+//            for(int i = 0; i < choices.length; i++){
+//                System.out.print(choices[i] + " ");
+//            }
+//        }else if(classChoice.equals("Archer")){
+//            String choices[] = {"quick fire bow,", " Dodge ", " Heal"};
+//            for(int i = 0; i < choices.length; i++){
+//                System.out.print(choices[i] + " ");
+//            }
+//        }else if(classChoice.equals("Wizard")){
+//            String choices[] = {"finger zap,", "Dodge", " Heal"};
+//            for(int i = 0; i < choices.length; i++){
+//                System.out.print(choices[i] + " ");
+//            }
+//        }
+//    }
 
     //getters
     public int getPlayerHp(){
@@ -57,7 +86,6 @@ public class Player {
         return playerWeaponType;
     }
 
-
     //setters
     public void setUserName(String name){
         userName = name;
@@ -69,6 +97,10 @@ public class Player {
 
     public void setPlayerAction(String action){
         playerAction = action;
+    }
+
+    public void setPlayerHp(int hp){
+        this.playerHp = hp;
     }
 
     public void setSoldier(){
@@ -101,36 +133,11 @@ public class Player {
         playerWeaponType = wizard.getWeaponType();
     }
 
-    //player action choices depending on the users choice of class
-    public void playerActionChoices(){
 
-        if(classChoice.equals("Archer")) {
-            String choices[] = {"quick fire bow,", " Dodge ", " Heal"};
-            for(int i = 0; i < choices.length; i++){
-                System.out.print(choices[i] + " ");
-            }
 
-        }else if(classChoice.equals("Wizard")){
-            String choices[] = {"finger zap,", "Dodge", " Heal"};
-            for(int i = 0; i < choices.length; i++){
-                System.out.print(choices[i] + " ");
-            }
-        }else if(classChoice.equals("Tank")){
-            String choices[] = {"heavy Swing,", "Shield Up ", " Heal"};
-            for(int i = 0; i < choices.length; i++){
-                System.out.print(choices[i] + " ");
-            }
-        }else if(classChoice.equals("Soldier")){
-            String choices[] = {"Swing Sword,", " Shield Up ", " Dodge ", " Heal"};
-            for(int i = 0; i < choices.length; i++){
-                System.out.print(choices[i] + " ");
-            }
-        }
-    }
 
     public String toString(){
         return "you are a " + classChoice + " with " + playerHp + "HP your Class is named " + characterName +
                 " your starting weapon is " + playerWeaponType;
     }
-
 }

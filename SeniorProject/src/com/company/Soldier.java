@@ -43,6 +43,8 @@ public class Soldier extends Character {
     }
 
 
+
+
     public String toString(){
         return super.toString();
     }
