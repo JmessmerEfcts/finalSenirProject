@@ -17,57 +17,63 @@ public class Main {
          Player player = new Player();
 
         //ask for userInfo and store in external file
-        System.out.println("Please enter your name");
+        System.out.println("Please enter your UserName");
         String userName = sc.nextLine();
         player.setUserName(userName);
-        writer.write("Name: " + userName + " ");
+        writer.write("UserName: " + userName + " ");
 
         System.out.println("Please enter your age");
         String userAge = sc.nextLine();
         player.setUserAge(userAge);
         writer.write("Age: " + userAge);
-
         writer.flush();
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
         //greet player with class choices
         System.out.println("Welcome to Dungeony Dungeon " +userName+ " who would you like to play as?");
+        System.out.println(" ");
         player.displayClassChoices();
         //global variables for userInfo
         String userClassChoice = sc.nextLine();
-
+        System.out.println(" ");
         //conditionals Calculating userClassChoice  & writing user's choice
         //to an external file
-        if(userClassChoice.equals("soldier") || userClassChoice.equals("Soldier")){
-            player.setSoldier();
-            System.out.println(player.toString());
-        }else if(userClassChoice.equals("tank") || userClassChoice.equals("Tank")){
-            writer.write(userClassChoice);
-            player.setTank();
-            System.out.println(player);
-        }else if(userClassChoice.equals("archer") || userClassChoice.equals("Archer")){
-            writer.write(userClassChoice);
-            player.setArcher();
+        boolean condition = false;
+        do{
+            if(userClassChoice.equals("soldier") || userClassChoice.equals("Soldier")){
+                condition = true;
+                player.setSoldier();
+                player.getPlayerClassChoice();
+                System.out.println(player.toString());
+            }else if(userClassChoice.equals("tank") || userClassChoice.equals("Tank")){
+                condition = true;
+                writer.write(userClassChoice);
+                player.setTank();
+                System.out.println(player);
+            }else if(userClassChoice.equals("archer") || userClassChoice.equals("Archer")){
+                condition = true;
+                writer.write(userClassChoice);
+                player.setArcher();
+                System.out.println(player);
+            }else if(userClassChoice.equals("wizard") || userClassChoice.equals("Wizard")){
+                condition = true;
+                writer.write(userClassChoice);
+                player.setWizard();
+                System.out.println(player);
+            }else {
+                condition = false;
+                System.out.println("Nope try again champ");
+                userClassChoice = sc.nextLine();
+            }
+        }while(condition == false);
 
-            System.out.println(player);
-        }else if(userClassChoice.equals("wizard") || userClassChoice.equals("Wizard")){
-            writer.write(userClassChoice);
-            player.setWizard();
-            System.out.println(player);
-        }else {
-            System.out.println("Nope");
-        }
         //you must flush the BufferedWriter obj in order to write text
         writer.flush();
 
-        /*
-        TODO
-         @Work on Battle Sequence
-         @boss attacks dont damage you
-         @sometimes boss doesnt select a weapon
-         @
-         */
-
         System.out.println("okay " + userClassChoice + " you have entered room 1");
+
 
         Boss bossObj = new Boss();
             bossObj.generateBossWeapon();
@@ -75,29 +81,34 @@ public class Main {
             System.out.println(bossObj.toString());
 
         Battle battle = new Battle(player, bossObj);
+        int playerMax = player.getPlayerMax();
+        int playerMin = player.getPlayerMin();
 
         //displays possible player actions
-        battle.playerActionChoices();
-         String playerAction = sc.nextLine();
-         System.out.println(playerAction);
+         battle.playerActionChoices();
+         //String selectedChoice = sc.nextLine();
+
+     //   player.setPlayerAction(selectedChoice);
+     //   System.out.println(selectedChoice);
 
         //Boss chooses action
         battle.possibleBossActions();
 
-        //calculate results
-        //battle.checkMoves();
-        //playerMoves(player,bossObj);
-
        //display player stats
-       System.out.println(player);
+        System.out.println("HP: " + player.getPlayerHp());
+        System.out.println("Class: " + player.getPlayerClassChoice());
+
+       //display boss stats
+        System.out.println("Boss Health " + bossObj.getBossHp());
+        System.out.println("Boss weapon " + bossObj.getBossWeapon());
 
 
           /*
         TODO
          @Work on Battle Sequence
-         @boss attacks dont damage you
-         @sometimes boss doesnt select a weapon
-         @
+         @boss attacks don't damage you
+         @sometimes boss doesn't select a weapon
+
          */
     }
 

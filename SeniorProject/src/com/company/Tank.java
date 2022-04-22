@@ -3,13 +3,22 @@ package com.company;
 public class Tank extends Character{
 
     public Tank(){
-        super(8, "Tank", "Mace", "Bolog");
+        super(8, 8, 0,"Tank", "Mace", "Bolog");
     }
 
     //getter
     public int getHitPoints(){
         return hitPoints;
     }
+
+    public int getTankMax(){
+        return maxHp;
+    }
+
+    public int getTankMin(){
+        return minHp;
+    }
+
 
     public String getCharacterType() {
         return characterType;

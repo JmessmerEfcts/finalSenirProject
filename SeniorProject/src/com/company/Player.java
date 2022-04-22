@@ -14,15 +14,23 @@ public class Player {
     // array storing possible class selections for user
     Character characterArr[] = {soldier, tank, archer, wizard};
 
+    private int playerMaxHp;
+    private int playerMinHp;
     private int playerHp;
+    private int playerHpUpdate;
+
     private String characterName;
     private String classChoice;
     private String playerWeaponType;
-    private String userName;
-    private String userAge;
     private String playerAction;
 
+    private String userName;
+    private String userAge;
+
+
     public Player(){
+        playerMaxHp = 0;
+        playerMinHp = 0;
         playerHp = 0;
         characterName = "nameHere";
         classChoice = "no class";
@@ -43,35 +51,18 @@ public class Player {
 
     }
 
-    //player action choices depending on the users choice of class
-//    public void playerActionChoices(){
-//        if(classChoice.equals("Soldier")) {
-//            String choices[] = {"Swing Sword,", " Shield Up ", " Dodge ", " Heal"};
-//            for(int i = 0; i < choices.length; i++){
-//                System.out.print(choices[i] + " ");
-//            }
-//
-//        }else if(classChoice.equals("Tank")){
-//            String choices[] = {"heavy Swing,", "Shield Up ", " Heal"};
-//            for(int i = 0; i < choices.length; i++){
-//                System.out.print(choices[i] + " ");
-//            }
-//        }else if(classChoice.equals("Archer")){
-//            String choices[] = {"quick fire bow,", " Dodge ", " Heal"};
-//            for(int i = 0; i < choices.length; i++){
-//                System.out.print(choices[i] + " ");
-//            }
-//        }else if(classChoice.equals("Wizard")){
-//            String choices[] = {"finger zap,", "Dodge", " Heal"};
-//            for(int i = 0; i < choices.length; i++){
-//                System.out.print(choices[i] + " ");
-//            }
-//        }
-//    }
 
     //getters
     public int getPlayerHp(){
         return playerHp;
+    }
+
+    public int getPlayerMax(){
+        return playerMaxHp;
+    }
+
+    public int getPlayerMin(){
+        return playerMinHp;
     }
 
     public String getPlayerName(){
@@ -80,6 +71,10 @@ public class Player {
 
     public String getPlayerClassChoice(){
         return classChoice;
+    }
+
+    public String getPlayerAction(){
+        return playerAction;
     }
 
     public String getPlayerWeaponType(){
@@ -100,12 +95,14 @@ public class Player {
     }
 
     public void setPlayerHp(int hp){
-        this.playerHp = hp;
+        playerHp = hp;
     }
 
     public void setSoldier(){
         classChoice = "Soldier";
         playerHp = soldier.getHitPoints();
+        playerMaxHp = soldier.getSoldierMax();
+        playerMinHp = soldier.getSoliderMin();
         characterName = soldier.getCharacterName();
         playerWeaponType = soldier.getWeaponType();
     }
@@ -113,6 +110,8 @@ public class Player {
     public void setTank(){
         classChoice = "Tank";
         playerHp = tank.getHitPoints();
+        playerMaxHp = tank.getTankMax();
+        playerMinHp = tank.getTankMin();
         characterName= tank.getCharacterName();
         playerWeaponType = tank.getWeaponType();
 
@@ -121,6 +120,8 @@ public class Player {
     public void setArcher(){
         classChoice = "Archer";
         playerHp = archer.getHitPoints();
+        playerMaxHp = archer.getArcherMax();
+        playerMinHp = archer.getArcherMin();
         characterName= archer.getCharacterName();
         playerWeaponType = archer.getWeaponType();
 
@@ -129,6 +130,8 @@ public class Player {
     public void setWizard(){
         classChoice = "Wizard";
         playerHp = wizard.getHitPoints();
+        playerMaxHp = wizard.getWizardMax();
+        playerMinHp = wizard.getWizardMin();
         characterName= wizard.getCharacterName();
         playerWeaponType = wizard.getWeaponType();
     }

@@ -8,6 +8,8 @@ public class Boss {
     Player player = new Player();
 
     private int bossHp;
+    private int bossMax;
+    private int bossMin = 0;
     private String bossName;
     private String bossWeapon;
     private int roomNumber;
@@ -23,6 +25,8 @@ public class Boss {
     }
 
     public Boss(){
+        this.bossMax = 8;
+        this.bossMin = 0;
         this.bossHp = 8;
         this.bossName = " ";
         this.bossWeapon = " ";
@@ -52,30 +56,37 @@ public class Boss {
     }
 
     //setters
-    public void setBossHp(int bossHp) {
-        this.bossHp = bossHp;
-    }
-
     public void setBossName(){
         Random rand = new Random();
         String nameArray[] = {"1","2","3","4","5"};
         int name = nameArray.length-1;
-        this.bossName = nameArray[name];
+        bossName = nameArray[name];
+    }
+
+    public void setBossHp(int newHp) {
+        bossHp = newHp;
+    }
+
+    public void setBossMax(int num){
+        bossMax = num;
+    }
+
+    public void setBossMin(){
+        bossMin = 0;
+    }
+
+    public void setBossWeapon(String weapon){
+        bossWeapon = weapon;
     }
 
     public void setStartingRoom(int startingRoom){
-        this.roomNumber = startingRoom;
+        roomNumber = startingRoom;
     }
 
 
-
-   public void setBossWeapon(String weapon){
-        this.bossWeapon = weapon;
-   }
-
     public void generateBossWeapon(){
         //array storing all the possible weapons the bosses can randomly use
-        String WeaponArr[] = {"Club", "Bear Claws", "Wand", "Bat"};
+        String WeaponArr[] = {"Club", "Bear Claws", "Wand"};
 
         Random rand = new Random();
         //set upperbound to length of the String array containing weapons
@@ -87,44 +98,6 @@ public class Boss {
         this.bossWeapon = bossWeapon;
         setBossWeapon(bossWeapon);
     }
-
-//    public void possibleBossActions(){
-//        if(bossWeapon.equals("Club")){
-//            Random rand = new Random();
-//            String bossActions[] = {"Swing ", " Block ", " Dodge ", " Cry "};
-//            int upperBound = bossActions.length;
-//            int randomBossAction = rand.nextInt(upperBound);
-//            String selectedAction = bossActions[randomBossAction];
-//            //decrease playerHp
-//           // battle.bossLightAttack();
-//
-//            System.out.println(bossName + " Used " + selectedAction);
-//
-//        }else if(bossWeapon.equals("Bear Claws")){
-//            Random rand = new Random();
-//            String bossActions[] = {" Scratch ", "pounce ", " Block ", " Dodge ", " Cry "};
-//            int upperBound = bossActions.length;
-//            int randomBossAction = rand.nextInt(upperBound);
-//            String selectedAction = bossActions[randomBossAction];
-//            //decrease playerHp
-//           // battle.bossLightAttack();
-//
-//            System.out.println(bossName + " Used " + selectedAction);
-//
-//        }else if(bossWeapon.equals("Wand")){
-//            Random rand = new Random();
-//            String bossActions[] = {"Zap ", " Block ", " Dodge ", " Cry "};
-//            int upperBound = bossActions.length;
-//            int randomBossAction = rand.nextInt(upperBound);
-//            String selectedAction = bossActions[randomBossAction];
-//            //decrease playerHp
-//           // battle.bossLightAttack();
-//
-//            System.out.println(bossName + " Used " + selectedAction);
-//        }else
-//            System.out.println("ope");
-//    }
-
 
 
     /*

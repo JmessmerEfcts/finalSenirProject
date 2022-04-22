@@ -3,13 +3,21 @@ package com.company;
 public class Wizard extends Character{
 
     public Wizard(){
-        super(5, "Wizard", "Sparkly fingertips", "Gandalf");
+        super(5, 5, 0, "Wizard", "fingertips", "Gandalf");
     }
 
 
     //getter
     public int getHitPoints(){
         return hitPoints;
+    }
+
+    public int getWizardMax(){
+        return maxHp;
+    }
+
+    public int getWizardMin(){
+        return minHp;
     }
 
     public String getCharacterType() {

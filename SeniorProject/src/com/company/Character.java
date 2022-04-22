@@ -1,7 +1,10 @@
 package com.company;
 
 public class Character {
+    int maxHp;
+    int minHp;
     int hitPoints = 0;
+
     String characterType;
     String characterWeaponType;
     String characterName;
@@ -15,7 +18,9 @@ public class Character {
     }
 
     //constructor for player Choices
-    public Character(int hp, String type, String weapon, String name){
+    public Character(int hp, int maxHp, int minHp, String type, String weapon, String name){
+        this.maxHp = maxHp;
+        this.minHp = minHp;
         hitPoints = hp;
         characterType = type;
         characterName = name;

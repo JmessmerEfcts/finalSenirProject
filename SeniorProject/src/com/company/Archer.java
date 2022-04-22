@@ -2,12 +2,19 @@ package com.company;
 
 public class Archer extends Character {
     public Archer(){
-        super(5, "Archer", "Bow'n Arrow", "Apollo");
+        super(5, 5, 0, "Archer", "Bow'n Arrow", "Apollo");
     }
 
     //getter
     public int getHitPoints(){
         return hitPoints;
+    }
+
+    public int getArcherMax(){
+        return maxHp;
+    }
+    public int getArcherMin(){
+        return minHp;
     }
 
     public String getCharacterType() {
