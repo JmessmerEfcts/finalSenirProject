@@ -114,7 +114,6 @@ public class Player {
         playerMinHp = tank.getTankMin();
         characterName= tank.getCharacterName();
         playerWeaponType = tank.getWeaponType();
-
     }
 
     public void setArcher(){
@@ -124,7 +123,6 @@ public class Player {
         playerMinHp = archer.getArcherMin();
         characterName= archer.getCharacterName();
         playerWeaponType = archer.getWeaponType();
-
     }
 
     public void setWizard(){
@@ -135,7 +133,6 @@ public class Player {
         characterName= wizard.getCharacterName();
         playerWeaponType = wizard.getWeaponType();
     }
-
 
 
 

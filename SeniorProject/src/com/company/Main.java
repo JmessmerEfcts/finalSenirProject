@@ -68,12 +68,10 @@ public class Main {
                 userClassChoice = sc.nextLine();
             }
         }while(condition == false);
-
         //you must flush the BufferedWriter obj in order to write text
         writer.flush();
 
         System.out.println("okay " + userClassChoice + " you have entered room 1");
-
 
         Boss bossObj = new Boss();
             bossObj.generateBossWeapon();
@@ -83,34 +81,67 @@ public class Main {
         Battle battle = new Battle(player, bossObj);
         int playerMax = player.getPlayerMax();
         int playerMin = player.getPlayerMin();
+        int playerCurrentHp = player.getPlayerHp();
 
-        //displays possible player actions
-         battle.playerActionChoices();
-         //String selectedChoice = sc.nextLine();
+        int bossCurrentHealth = bossObj.getBossHp();
+        int bossMax = bossObj.getBossMax();
+        int bossMin = bossObj.getBossMin();
 
-     //   player.setPlayerAction(selectedChoice);
-     //   System.out.println(selectedChoice);
+            System.out.println("playerHp " + player.getPlayerHp());
+            System.out.println("BossHp " + bossObj.getBossHp());
 
-        //Boss chooses action
-        battle.possibleBossActions();
+         while(playerCurrentHp > playerMin || bossCurrentHealth > bossMin) {
+              playerMax = player.getPlayerMax();
+              playerMin = player.getPlayerMin();
+              playerCurrentHp = player.getPlayerHp();
 
-       //display player stats
-        System.out.println("HP: " + player.getPlayerHp());
-        System.out.println("Class: " + player.getPlayerClassChoice());
+              bossCurrentHealth = bossObj.getBossHp();
+              bossMax = bossObj.getBossMax();
+              bossMin = bossObj.getBossMin();
 
-       //display boss stats
-        System.out.println("Boss Health " + bossObj.getBossHp());
-        System.out.println("Boss weapon " + bossObj.getBossWeapon());
+           //displays possible player actions
+           battle.playerActionChoices();
+           System.out.println("TEST " + player.getPlayerAction());
+
+           //Boss chooses action
+           battle.possibleBossActions();
+
+           battle.calculateResults();
+
+           //display player stats
+           System.out.println("HP: " + player.getPlayerHp());
+           System.out.println("Class: " + player.getPlayerClassChoice());
+
+           //display boss stats
+           System.out.println("Boss Health " + bossObj.getBossHp());
+           System.out.println("Boss weapon " + bossObj.getBossWeapon());
+
+           if(bossCurrentHealth == bossMin){
+               System.out.println("You have Defeated the Boss!!! You Win");
+               break;
+           }else if(playerCurrentHp == playerMin){
+               System.out.println("You died Game Over");
+               break;
+           }
+         } //end while
+
+        System.out.println("Game Ended");
+
+       }
+   }
+
+        //display player moves and ask again until player health is zero or boss health is zero
+
+
 
 
           /*
         TODO
-         @Work on Battle Sequence
-         @boss attacks don't damage you
-         @sometimes boss doesn't select a weapon
-
+         @if user uses light attack and boss uses dodge/block null pointer exception
+         @bossAction is assigned after user action it doesnt know what it is yet
+         @maybe getter??? or SETTTTEERRRR????????????????
          */
-    }
+
 
 
 //    public static void playerMoves(Player player, Boss boss){
@@ -126,6 +157,5 @@ public class Main {
 //        player.decreasePlayerHpByOne();
 //    }
 
-}
 
 

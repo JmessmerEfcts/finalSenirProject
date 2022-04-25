@@ -12,6 +12,7 @@ public class Boss {
     private int bossMin = 0;
     private String bossName;
     private String bossWeapon;
+    private String bossAction;
     private int roomNumber;
     private int bossDamage;
 
@@ -43,6 +44,14 @@ public class Boss {
         return bossName;
     }
 
+    public int getBossMax(){
+        return bossMax;
+    }
+
+    public int getBossMin(){
+        return bossMin;
+    }
+
     public String getBossWeapon(){
         return bossWeapon;
     }
@@ -55,12 +64,20 @@ public class Boss {
         return roomNumber;
     }
 
+    public String getBossAction(){
+        return bossAction;
+    }
+
     //setters
     public void setBossName(){
         Random rand = new Random();
         String nameArray[] = {"1","2","3","4","5"};
         int name = nameArray.length-1;
         bossName = nameArray[name];
+    }
+
+    public void setBossAction(String action){
+        bossAction = action;
     }
 
     public void setBossHp(int newHp) {
