@@ -1,18 +1,19 @@
 package com.company;
 
-import com.company.Player;
-import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
-
+import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        //GUI object
+        GameForm gameForm = new GameForm();
+
         Scanner sc = new Scanner(System.in);
         BufferedWriter writer = new BufferedWriter(new FileWriter("userInfo"));
 
         //creates empty player obj
-         Player player = new Player();
+        Player player = new Player();
 
         //ask for userInfo and store in external file
         System.out.println("Please enter your UserName");
