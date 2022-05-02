@@ -116,7 +116,6 @@ public class Boss {
         setBossWeapon(bossWeapon);
     }
 
-
     /*
         TODO
          @ each room will make his HP higher, name different, and change his Weapon

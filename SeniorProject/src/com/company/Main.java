@@ -6,9 +6,7 @@ import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 import java.io.*;
 import java.util.Scanner;
 
-
 public class Main {
-
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         BufferedWriter writer = new BufferedWriter(new FileWriter("userInfo"));
@@ -27,9 +25,6 @@ public class Main {
         player.setUserAge(userAge);
         writer.write("Age: " + userAge);
         writer.flush();
-
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
 
         //greet player with class choices
         System.out.println("Welcome to Dungeony Dungeon " +userName+ " who would you like to play as?");
@@ -90,7 +85,8 @@ public class Main {
             System.out.println("playerHp " + player.getPlayerHp());
             System.out.println("BossHp " + bossObj.getBossHp());
 
-         while(playerCurrentHp > playerMin || bossCurrentHealth > bossMin) {
+        //player enters battle sequence
+        do{
               playerMax = player.getPlayerMax();
               playerMin = player.getPlayerMin();
               playerCurrentHp = player.getPlayerHp();
@@ -99,22 +95,18 @@ public class Main {
               bossMax = bossObj.getBossMax();
               bossMin = bossObj.getBossMin();
 
-           //displays possible player actions
+           //display and set player action
            battle.playerActionChoices();
-           System.out.println("TEST " + player.getPlayerAction());
 
-           //Boss chooses action
+           //Boss sets an action
            battle.possibleBossActions();
 
+           //check moves
            battle.calculateResults();
 
-           //display player stats
-           System.out.println("HP: " + player.getPlayerHp());
-           System.out.println("Class: " + player.getPlayerClassChoice());
-
-           //display boss stats
-           System.out.println("Boss Health " + bossObj.getBossHp());
-           System.out.println("Boss weapon " + bossObj.getBossWeapon());
+             //display health stats
+             System.out.println("Boss Health " + bossObj.getBossHp());
+             System.out.println("your Health: " + player.getPlayerHp());
 
            if(bossCurrentHealth == bossMin){
                System.out.println("You have Defeated the Boss!!! You Win");
@@ -123,39 +115,13 @@ public class Main {
                System.out.println("You died Game Over");
                break;
            }
-         } //end while
+         }while(playerCurrentHp > playerMin || bossCurrentHealth > bossMin);//end while
 
         System.out.println("Game Ended");
-
        }
    }
 
-        //display player moves and ask again until player health is zero or boss health is zero
 
-
-
-
-          /*
-        TODO
-         @if user uses light attack and boss uses dodge/block null pointer exception
-         @bossAction is assigned after user action it doesnt know what it is yet
-         @maybe getter??? or SETTTTEERRRR????????????????
-         */
-
-
-
-//    public static void playerMoves(Player player, Boss boss){
-//        Scanner sc = new Scanner(System.in);
-//        //display playerActionChoice()
-//        player.playerActionChoices();
-//        String userAction = sc.nextLine();
-//        player.setPlayerAction(userAction);
-//        System.out.println(userAction);
-//
-//        //display bosses move
-//        boss.possibleBossActions();
-//        player.decreasePlayerHpByOne();
-//    }
 
 
 

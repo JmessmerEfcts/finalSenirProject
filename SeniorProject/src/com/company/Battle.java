@@ -32,11 +32,12 @@ public class Battle{
      */
 
      private Boss boss;
-    private Player player;
+     private Player player;
 
     public Battle(Player Mplayer, Boss Mboss){
         player=Mplayer;
         boss = Mboss;
+
         playerHp = player.getPlayerHp();
         playerMaxHp = player.getPlayerMax();
         playerMinHp = player.getPlayerMin();
@@ -47,7 +48,6 @@ public class Battle{
         bossHp = boss.getBossHp();
         bossWeapon = boss.getBossWeapon();
         bossDamage = boss.getBossDamage();
-
     }
 
     //player action choices depending on the users choice of class
@@ -55,28 +55,36 @@ public class Battle{
         /*
         while loop until correct entry
          */
+        boolean condition = false;
+        while(condition == false){
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do? ");
+
+
         if(playerChoice.equals("Archer")) {
-            String choices[] = {"Quick Fire Bow", "Dodge", "Heal"};
+            String choices[] = {"shootbow", "Dodge", "Heal"};
             for(int i = 0; i < choices.length; i++){
                 System.out.print(choices[i] + " ");
             }
             userAction = sc.nextLine();
             //quick fire bow
             if(userAction.equals(choices[0])){
+                condition = true;
                 player.setPlayerAction(userAction);
             //dodge
             }else if(userAction.equals(choices[1])){
+                condition = true;
                 player.setPlayerAction(userAction);
-                playerLosesNoHp();
+
             //heal
             }else if(userAction.equals(choices[2])){
+                condition = true;
                 player.setPlayerAction(userAction);
             }else{
-                System.out.println("Please Select a valid move");
-                userAction = sc.nextLine();
-
+                condition = false;
+                System.out.println(" ");
+                System.out.println("Nope try again");
+               System.out.println(" ");
             }
 
         }else if(playerChoice.equals("Wizard")){
@@ -89,25 +97,30 @@ public class Battle{
 
             //finger zap
             if(userAction.equals(choices[0])){
+                condition = true;
                 player.setPlayerAction(userAction);
                 System.out.println("Test: " + player.getPlayerAction());
 //
             //dodge
             }else if(userAction.equals(choices[1])){
+                condition = true;
                 player.setPlayerAction(userAction);
                 System.out.println("Test: " + player.getPlayerAction());
-                playerLosesNoHp();
+
             //heal
             }else if(userAction.equals(choices[2])){
+                condition = true;
                 userAction = "Heal";
                 player.setPlayerAction(userAction);
             }else{
-                System.out.println("Please Select a valid move");
-                userAction = sc.nextLine();
+                condition = false;
+                System.out.println(" ");
+                System.out.println("Nope try again");
+                System.out.println(" ");
             }
 
         }else if(playerChoice.equals("Tank")){
-            String choices[] = {"Heavy Swing", "Shield Up", "Heal"};
+            String choices[] = {"HeavySwing", "Block", "Heal"};
             for(int i = 0; i < choices.length; i++){
                 System.out.print(choices[i] + " ");
             }
@@ -115,23 +128,28 @@ public class Battle{
 
             //Heavy Swing
             if(userAction.equals(choices[0])){
+                condition = true;
                 player.setPlayerAction(userAction);
             //Shield Up
             }else if(userAction.equals(choices[1])){
+                condition = true;
                 player.setPlayerAction(userAction);
 
             //heal
             }else if(userAction.equals(choices[2])){
+                condition = true;
                 player.setPlayerAction(userAction);
 
             }else{
-                System.out.println("Please Select a valid move");
-                userAction = sc.nextLine();
+                condition = false;
+                System.out.println(" ");
+                System.out.println("Nope try again");
+                System.out.println(" ");
             }
 
 
         }else if(playerChoice.equals("Soldier")){
-            String choices[] = {"Swing Sword", "Dodge", "Heal"};
+            String choices[] = {"SwingSword", "Dodge", "Heal"};
             for(int i = 0; i< choices.length; i++){
                  System.out.print(choices[i] + " ");
             }
@@ -139,24 +157,31 @@ public class Battle{
 
             //Swing Sword
             if(userAction.equals(choices[0])) {
+                condition = true;
                 player.setPlayerAction(userAction);
 
             //dodge
             }
             else if(userAction.equals(choices[1])){
+                condition = true;
                 player.setPlayerAction(userAction);
 
             //heal
             }else if(userAction.equals(choices[2])){
+                condition = true;
                 player.setPlayerAction(userAction);
             }else{
-                System.out.println("Please Select a valid move");
-                userAction = sc.nextLine();
+                condition = false;
+                System.out.println(" ");
+                System.out.println("Nope try again");
+                System.out.println(" ");
             }
         }else{
             System.out.println("outside else");
         }
-    }
+
+        }//end while
+    }//end playerActionChoices
 
     public void possibleBossActions(){
         if(bossWeapon.equals("Club")){
@@ -178,7 +203,6 @@ public class Battle{
                 }else{
                     System.out.println("boss failed to select a move in club");
                 }
-
             System.out.println("your enemy Used " + bossAction);
 
         }else if(bossWeapon.equals("Bear Claws")){
@@ -188,6 +212,7 @@ public class Battle{
             int upperBound = bossActions.length;
             int randomBossAction = rand.nextInt(upperBound);
             bossAction = bossActions[randomBossAction];
+
 
                 //scratch
                 if(bossAction.equals(bossActions[0])){
@@ -240,71 +265,71 @@ public class Battle{
         try {
             userAction = player.getPlayerAction();
                 //calculate soldier moves
-                if(userAction.equals("Swing Sword")){
+                if(userAction.equals("SwingSword") || userAction.equals("swingsword") || userAction.equals("swingSword") || userAction.equals("swing sword")){
                     if(bossAction.equals("Dodge") || bossAction.equals("Block")){
-                        enemyLosesNoHp();
+                        System.out.println("your attack has no effect");
                     }else
                         playerLightAttack();
                 }else if(userAction.equals("Dodge")){
                     playerLosesNoHp();
                 }else if(userAction.equals("Heal")) {
-                    if(playerHp == playerMaxHp) {
-                        System.out.println(" Already Full health");
-                        userAction = sc.nextLine();
-                    }else
+                    System.out.println("TEST SOLDIER HEAL maxHp = " + player.getPlayerMax());
+                    if(player.getPlayerHp() != player.getPlayerMax()) {
+                        System.out.println("You have Healed");
                         playerHeal();
-                }else
-                   // System.out.println("CalculateResults: Solder");
+                    }else
+                        System.out.println("bye");
+                        System.out.println("Already Full health");
+                }
+
+
 
                 //calculate tank moves
-                if(userAction.equals("Heavy Swing")){
+                if(userAction.equals("HeavySwing") || userAction.equals("heavySwing") || userAction.equals("Heavy Swing")){
                     if(bossAction.equals("Dodge") || bossAction.equals("Block")){
-                        System.out.println("it has no effect");
+                        System.out.println("your attack has no effect");
                     }else{
                         playerLightAttack();
                     }
-                }else if(userAction.equals("Shield Up")){
-                    playerLosesNoHp();
+                }else if(userAction.equals("block") || userAction.equals("Block") || userAction.equals("BLOCK")){
+                    System.out.println("you blocked"); //playerLosesNoHp();
                 }else if(userAction.equals("Heal")){
-                    if(playerHp == playerMaxHp) {
-                       System.out.println(" Already Full health");
-                        userAction = sc.nextLine();
-                    }else
-                        playerHeal();
-                }else
-                    System.out.println("CalculateResults: Tank");
+//                    if(playerHp == playerMaxHp) {
+//                       System.out.println(" Already Full health");
+//                        userAction = sc.nextLine();
+//                    }else
+//                        playerHeal();
+                }
 
                 //calculate wizard moves
                 if(userAction.equals("Finger Zap")){
                     if (bossAction.equals("Dodge") || bossAction.equals("Block"))
-                        System.out.println("it has no effect");
+                        System.out.println("your attack has no effect");
                     else
                         playerLightAttack();
                 }else if(userAction.equals("Dodge")){
-                    playerLosesNoHp();
+                    System.out.println("You used Dodge"); //playerLosesNoHp();
                 }else if(userAction.equals("Heal")){
-                    if(playerHp == playerMaxHp) {
-                        System.out.println(" Already Full health");
-                        userAction = sc.nextLine();
-                    }else
-                        playerHeal();
-                }else
-                   // System.out.println("CalculateResults: Wizard");
+//                    if(playerHp == playerMaxHp) {
+//                        userAction = sc.nextLine();
+//                    }else
+//                        playerHeal();
+                }
 
                 //calculate archer moves{
-                if(userAction.equals("Quick fire bow")){
+                if(userAction.equals("shootbow")){
                     if (bossAction.equals("Dodge") || bossAction.equals("Block"))
-                        System.out.println("it has no effect");
+                        System.out.println("your attack has no effect");
                     else
                         playerLightAttack();
-                }else if(userAction.equals("Dodge"))
-                    playerLosesNoHp();
+                }else if(userAction.equals("Dodge") || userAction.equals("dodge") || userAction.equals("DODGE"))
+                    System.out.println("You used Dodge"); //playerLosesNoHp();
                 else if(userAction.equals("Heal")){
-                    if(playerHp == playerMaxHp) {
-                        System.out.println(" Already Full health");
-                        userAction = sc.nextLine();
-                    }else
-                        playerHeal();
+//                    if(playerHp == playerMaxHp) {
+//                        System.out.println(" Already Full health");
+//                        userAction = sc.nextLine();
+//                    }else
+//                        playerHeal();
                 }
 
             bossAction = boss.getBossAction();
@@ -315,12 +340,12 @@ public class Battle{
                     System.out.println("His attack does no damage");
                 else
                     bossLightAttack();
-
             }else if(bossAction.equals("Dodge")){
                 enemyLosesNoHp();
             }else if(bossAction.equals("Cry")){
                System.out.println("He is very sad");
             }
+
 
             //calculate moves for Bear Claws
             if(bossAction.equals("Scratch")){
@@ -336,6 +361,9 @@ public class Battle{
             }else if(bossAction.equals("Block")){
                 enemyLosesNoHp();
             }
+
+
+
 
             //Calculate Moves for wand
             if (bossAction.equals("Zap")){
@@ -353,9 +381,6 @@ public class Battle{
             }else if(bossAction.equals("Cry"))
                 System.out.println("He is Very Sad");
 
-
-            System.out.println("Player action " + userAction);
-            System.out.println("Boss Action " + bossAction);
 
         }catch(Exception e){
             System.out.println(e);
