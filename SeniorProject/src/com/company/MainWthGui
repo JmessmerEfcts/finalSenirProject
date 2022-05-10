@@ -1,0 +1,199 @@
+package com.company.gameEngine;
+
+import com.company.GameForm;
+import java.io.*;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        GameForm gameForm = new GameForm();
+        Main t = new Main();
+
+        Scanner sc = new Scanner(System.in);
+        BufferedWriter writer = new BufferedWriter(new FileWriter("userInfo"));
+
+        //creates empty player obj
+        Player player = new Player();
+
+        //ask for userInfo and store in external file
+        boolean checkButton = gameForm.isSubmitButtonSelceted();
+        System.out.println(checkButton);
+
+        t.login(gameForm);
+
+        //loop while age == false
+        gameForm.updateGameActivty("Please enter your age");
+
+        String userAge = gameForm.getUserInput();
+        boolean checkAge = userAge.matches("[0-9]");
+
+        boolean checkButto = gameForm.isSubmitButtonSelceted();
+
+        while (checkButto == false) {
+            if (checkButto == false) {
+
+            }
+        }
+        player.setUserAge(userAge);
+        writer.write("Age: " + userAge);
+        writer.flush();
+
+        //greet player with class choices
+        //gameForm.updateGameActivty("Welcome to Dungeony Dungeon " + userName + " who would you like to play as?");
+        //System.out.println("Welcome to Dungeony Dungeon " +userName+ " who would you like to play as?");
+        System.out.println(" ");
+
+        player.displayClassChoices();
+        //global variables for userInfo
+        String userClassChoice = sc.nextLine();
+        System.out.println(" ");
+        //conditionals Calculating userClassChoice  & writing user's choice
+        //to an external file
+        boolean userClassChoiceCondtion = false;
+        do {
+            if (userClassChoice.equals("soldier") || userClassChoice.equals("Soldier")) {
+                userClassChoiceCondtion = true;
+                player.setSoldier();
+                player.getPlayerClassChoice();
+                //gameForm.updateGameActivty(player.toString());
+                System.out.println(player.toString());
+            } else if (userClassChoice.equals("tank") || userClassChoice.equals("Tank")) {
+                userClassChoiceCondtion = true;
+                writer.write(userClassChoice);
+                player.setTank();
+                System.out.println(player);
+            } else if (userClassChoice.equals("archer") || userClassChoice.equals("Archer")) {
+                userClassChoiceCondtion = true;
+                writer.write(userClassChoice);
+                player.setArcher();
+                System.out.println(player);
+            } else if (userClassChoice.equals("wizard") || userClassChoice.equals("Wizard")) {
+                userClassChoiceCondtion = true;
+                writer.write(userClassChoice);
+                player.setWizard();
+                System.out.println(player);
+            } else {
+                userClassChoiceCondtion = false;
+                System.out.println("Nope try again champ");
+                userClassChoice = sc.nextLine();
+            }
+        } while (userClassChoiceCondtion == false);
+        //you must flush the BufferedWriter obj in order to write text
+        writer.flush();
+
+        System.out.println("okay " + userClassChoice + " you have entered room 1");
+
+        Boss bossObj = new Boss();
+        bossObj.generateBossWeapon();
+        bossObj.setBossName();
+        System.out.println(bossObj.toString());
+
+        Battle battle = new Battle(player, bossObj);
+        int playerMax = player.getPlayerMax();
+        int playerMin = player.getPlayerMin();
+        int playerCurrentHp = player.getPlayerHp();
+
+        int bossCurrentHealth = bossObj.getBossHp();
+        int bossMax = bossObj.getBossMax();
+        int bossMin = bossObj.getBossMin();
+
+        System.out.println("playerHp " + player.getPlayerHp());
+        System.out.println("BossHp " + bossObj.getBossHp());
+
+        //player enters battle sequence
+        do {
+            playerMax = player.getPlayerMax();
+            playerMin = player.getPlayerMin();
+            playerCurrentHp = player.getPlayerHp();
+
+            bossCurrentHealth = bossObj.getBossHp();
+            bossMax = bossObj.getBossMax();
+            bossMin = bossObj.getBossMin();
+
+            //display and set player action
+            battle.playerActionChoices();
+
+            //Boss sets an action
+            battle.possibleBossActions();
+
+            //check moves
+            battle.calculateResults();
+
+            //display health stats
+            System.out.println("Boss Health " + bossObj.getBossHp());
+            System.out.println("your Health: " + player.getPlayerHp());
+
+            if (bossCurrentHealth == bossMin) {
+                writer.write("You defeated the Boss");
+                System.out.println("You have Defeated the Boss!!! You Win");
+                break;
+            } else if (playerCurrentHp == playerMin) {
+                System.out.println("You died Game Over");
+                writer.write("You Died");
+                break;
+            }
+        } while (playerCurrentHp > playerMin || bossCurrentHealth > bossMin);//end while
+//
+//            System.out.println("Game Ended");
+
+    }
+
+    public void login(GameForm form){
+                form.updateGameActivty("Please enter your username");
+                while(true){
+                    if(form.isSubmitButtonSelceted()){
+                        break;
+                    }
+                }
+
+        String userName = form.getUserInput();
+
+        Boolean checkUser = false;
+
+        while (checkUser == false) {
+                    form.updateGameActivty("try again");
+                    form.updateGameActivty("Please enter your username");
+
+                    if (checkUser == false) {
+                        form.updateGameActivty("please enter your username");
+                        System.out.println("hi");
+
+                    } else {
+                        form.updateGameActivty("matches");
+                        checkUser = true;
+                    }
+                }
+
+                form.updateGameActivty("Please enter your Age");
+                String age = form.getUserInput();
+                boolean checkAge = age.matches("[0-99]");
+                while(checkAge == false){
+                    form.updateGameActivty("nope");
+                    form.updateGameActivty("Please enter your age");
+                    checkAge = age.matches("[0-9]");
+                    if(checkAge == false){
+                        form.updateGameActivty("Please enter a number");
+                    }else{
+                        checkAge = true;
+                        break;
+                    }
+                }
+            }
+
+            private Boolean check(String str){
+                Pattern pattern = Pattern.compile("[~#@*+%{}<>\\[\\]|\"\\_^]");
+                Matcher matcher = pattern.matcher(str);
+                System.out.print("boo");
+                return matcher.find();
+            }
+    }
+
+
+
+
+
+
+
