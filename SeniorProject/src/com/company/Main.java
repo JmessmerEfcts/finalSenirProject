@@ -1,4 +1,5 @@
-package com.company;
+package com.company.gameEngine;
+
 
 import javax.swing.*;
 import java.io.*;
@@ -6,8 +7,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //GUI object
-        GameForm gameForm = new GameForm();
 
         Scanner sc = new Scanner(System.in);
         BufferedWriter writer = new BufferedWriter(new FileWriter("userInfo"));
@@ -70,9 +69,21 @@ public class Main {
         System.out.println("okay " + userClassChoice + " you have entered room 1");
 
         Boss bossObj = new Boss();
-            bossObj.generateBossWeapon();
-            bossObj.setBossName();
-            System.out.println(bossObj.toString());
+        bossObj.generateBossWeapon();
+        bossObj.setBossName();
+        System.out.println(bossObj.toString());
+
+        battle(player, bossObj, writer);
+
+        System.out.println("Game Ended");
+    }
+
+
+
+
+    public static void battle(Player bPlayer, Boss bBoss, BufferedWriter writer) {
+        Player player = bPlayer;
+        Boss bossObj = bBoss;
 
         Battle battle = new Battle(player, bossObj);
         int playerMax = player.getPlayerMax();
@@ -83,46 +94,63 @@ public class Main {
         int bossMax = bossObj.getBossMax();
         int bossMin = bossObj.getBossMin();
 
-            System.out.println("playerHp " + player.getPlayerHp());
-            System.out.println("BossHp " + bossObj.getBossHp());
+        System.out.println("playerHp " + player.getPlayerHp());
+        System.out.println("BossHp " + bossObj.getBossHp());
+
 
         //player enters battle sequence
         do{
-              playerMax = player.getPlayerMax();
-              playerMin = player.getPlayerMin();
-              playerCurrentHp = player.getPlayerHp();
+            playerMax = player.getPlayerMax();
+            playerMin = player.getPlayerMin();
+            playerCurrentHp = player.getPlayerHp();
 
-              bossCurrentHealth = bossObj.getBossHp();
-              bossMax = bossObj.getBossMax();
-              bossMin = bossObj.getBossMin();
+            bossCurrentHealth = bossObj.getBossHp();
+            bossMax = bossObj.getBossMax();
+            bossMin = bossObj.getBossMin();
 
-           //display and set player action
-           battle.playerActionChoices();
+            try {
+            if(bossCurrentHealth == bossMin){
+                System.out.println("You have Defeated the Boss!!! You Win");
+                writer.write(" boss defeated ");
+                break;
+            }else if(playerCurrentHp == playerMin){
+                System.out.println("You died Game Over");
+                writer.write(" you Died ");
+                writer.flush();
+                break;
+            }
+            } catch (IOException e) {
+                System.out.println("ERROR " + e);
+            }
 
-           //Boss sets an action
-           battle.possibleBossActions();
+            //display and set player action
+            battle.playerActionChoices();
 
-           //check moves
-           battle.calculateResults();
+            //Boss sets an action
+            battle.possibleBossActions();
 
-             //display health stats
-             System.out.println("Boss Health " + bossObj.getBossHp());
-             System.out.println("your Health: " + player.getPlayerHp());
+            //check moves
+            battle.calculateResults();
 
-           if(bossCurrentHealth == bossMin){
-               System.out.println("You have Defeated the Boss!!! You Win");
-               break;
-           }else if(playerCurrentHp == playerMin){
-               System.out.println("You died Game Over");
-               break;
-           }
-         }while(playerCurrentHp > playerMin || bossCurrentHealth > bossMin);//end while
+            //display health stats
+            System.out.println("Boss Health " + bossObj.getBossHp());
+            System.out.println("your Health: " + player.getPlayerHp());
+            try {
+            if(bossCurrentHealth == bossMin){
+                System.out.println("You have Defeated the Boss!!! You Win");
+                writer.write(" boss defeated ");
+                break;
+            }else if(playerCurrentHp == playerMin){
+                System.out.println("You died Game Over");
+                writer.write(" you Died ");
+                writer.flush();
+                break;
+            }
+            }catch (Exception e){
+                System.out.println("ERROR " + e);
+            }
+        }while(playerCurrentHp >= playerMin || bossCurrentHealth >= bossMin);//end while
+    }
 
-        System.out.println("Game Ended");
-       }
-   }
 
-
-
-
-
+}
