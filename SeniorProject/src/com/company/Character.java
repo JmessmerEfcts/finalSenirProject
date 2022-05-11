@@ -1,4 +1,4 @@
-package com.company;
+package com.company.gameEngine;
 
 public class Character {
     int maxHp;

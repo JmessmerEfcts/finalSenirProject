@@ -1,10 +1,13 @@
-package com.company;
+package com.company.gameEngine;
+import com.company.GameForm;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Player {
+    Scanner sc = new Scanner(System.in);
+
 
     Soldier soldier = new Soldier();
     Tank tank = new Tank();
@@ -40,19 +43,36 @@ public class Player {
         playerAction = " ";
     }
 
-    public  void displayClassChoices() {
+    public void displayClassChoices() {
         Scanner sc = new Scanner(System.in);
-
         String arr[] = {"Soldier", "Tank", "Archer", "Wizard"};
-        int i;
-        for (i = 0; i < arr.length; i++) {
+
+        for(int i = 0; i< arr.length; i++){
+            //gui.updateGameActivty(arr[i] + " ");
+
             System.out.print(arr[i] + " ");
         }
-
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------");
+        //System.out.println("---------------------------");
     }
 
-
     //getters
+    public void getPlayerInfo(BufferedWriter bufferedWriter) throws IOException {
+        BufferedWriter writer = bufferedWriter;
+
+        System.out.println("Please enter your UserName");
+        String userName = sc.nextLine();
+        setUserName(userName);
+        writer.write("UserName: " + userName + " ");
+
+        System.out.println("Please enter your age");
+        String userAge = sc.nextLine();
+        setUserAge(userAge);
+        writer.write("Age: " + userAge);
+        writer.flush();
+    }
+
     public int getPlayerHp(){
         return playerHp;
     }
@@ -65,8 +85,8 @@ public class Player {
         return playerMinHp;
     }
 
-    public String getPlayerName(){
-        return characterName;
+    public String getPlayerUserName(){
+        return userName;
     }
 
     public String getPlayerClassChoice(){
@@ -134,10 +154,41 @@ public class Player {
         playerWeaponType = wizard.getWeaponType();
     }
 
+    public void setPlayerClassChoice(String choice, BufferedWriter bufferedWriter) throws IOException {
+        classChoice = choice;
+       BufferedWriter writer = bufferedWriter;
 
+        boolean condition = false;
+        do {
+            if (choice.equals("soldier") || choice.equals("Soldier")) {
+                condition = true;
+                setSoldier();
+                getPlayerClassChoice();
+            } else if (choice.equals("tank") || choice.equals("Tank")) {
+                condition = true;
+                writer.write(choice);
+                setTank();
+            } else if (choice.equals("archer") || choice.equals("Archer")) {
+                condition = true;
+                writer.write(choice);
+                setArcher();
+            } else if (choice.equals("wizard") || choice.equals("Wizard")) {
+                condition = true;
+                writer.write(choice);
+                setWizard();
+            } else {
+                condition = false;
+                System.out.println("Nope try again champ");
+                choice = sc.nextLine();
+            }
+        } while (condition == false);
+    }
 
     public String toString(){
-        return "you are a " + classChoice + " with " + playerHp + "HP your Class is named " + characterName +
-                " your starting weapon is " + playerWeaponType;
+        System.out.println("---------------------------------------------------- " + "\n" +
+                " you are a " + classChoice + " with " + playerHp + "HP your Class is named " + characterName +
+                " your starting weapon is " + playerWeaponType + "\n" +
+                "----------------------------------------------------");
+        return "";
     }
 }

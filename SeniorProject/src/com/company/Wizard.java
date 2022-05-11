@@ -1,6 +1,8 @@
-package com.company;
+package com.company.gameEngine;
 
-public class Wizard extends Character{
+import com.company.gameEngine.Character;
+
+public class Wizard extends Character {
 
     public Wizard(){
         super(5, 5, 0, "Wizard", "fingertips", "Gandalf");

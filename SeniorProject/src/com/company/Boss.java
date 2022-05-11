@@ -1,11 +1,8 @@
-package com.company;
+package com.company.gameEngine;
 
-import java.awt.datatransfer.StringSelection;
 import java.util.Random;
 
 public class Boss {
-    //empty player obj
-    Player player = new Player();
 
     private int bossHp;
     private int bossMax;
@@ -103,7 +100,7 @@ public class Boss {
 
     public void generateBossWeapon(){
         //array storing all the possible weapons the bosses can randomly use
-        String WeaponArr[] = {"Club", "Bear Claws", "Wand"};
+        String WeaponArr[] = {"Club", "Bear Claw", "Wand"};
 
         Random rand = new Random();
         //set upperbound to length of the String array containing weapons
@@ -116,14 +113,9 @@ public class Boss {
         setBossWeapon(bossWeapon);
     }
 
-    /*
-        TODO
-         @ each room will make his HP higher, name different, and change his Weapon
-         @ each boss will do different amounts of damage depending on the room the user is in
-     */
-
     public String toString(){
-        return "Its a Horrible Creature " + "it looks like he's got " + bossHp + " HP He is holding a " + bossWeapon +
-                " they call Him " + bossName;
+        System.out.println("Its a Horrible Creature " + "it looks like he's got " + bossHp + " HP He is holding a " + bossWeapon);
+        return "";
+
     }
 }

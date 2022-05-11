@@ -1,6 +1,8 @@
-package com.company;
+package com.company.gameEngine;
 
-public class Tank extends Character{
+import com.company.gameEngine.Character;
+
+public class Tank extends Character {
 
     public Tank(){
         super(8, 8, 0,"Tank", "Mace", "Bolog");

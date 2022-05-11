@@ -1,4 +1,6 @@
-package com.company;
+package com.company.gameEngine;
+
+import com.company.gameEngine.Character;
 
 public class Soldier extends Character {
 
